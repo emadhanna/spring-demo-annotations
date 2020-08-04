@@ -1,12 +1,17 @@
 package com.luv2code.springdemo;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 //@Component("thatSillyCoach")
 @Component
+//@Scope("prototype")
 public class TennisCoach implements Coach {
 	
 	@Autowired
@@ -32,7 +37,19 @@ public class TennisCoach implements Coach {
 	public String getTeam() {
 		System.out.println(">> TennisCoach: reading team value");
 		return team;
-	}	
+	}
+	
+	//Define my Init Method
+	@PostConstruct
+	public void doMyStartupStuff() {
+		System.out.println(">> TennisCoach: Inside of doMyStartupStuff() Method");
+	}
+	
+	//Define my Destroy Method
+	@PreDestroy
+	public void doMyDestroyStuff() {
+			System.out.println(">> TennisCoach: Inside of doMyDestroyStuff() Method");
+	}
 
 //	@Autowired	
 //	public TennisCoach(FortuneService fortuneService) {
